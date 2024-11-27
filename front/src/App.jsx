@@ -1,14 +1,23 @@
 import styled from "styled-components";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import StyledButton from "./components/StyledButton";
+import LoginPage from "./pages/LoginPage";
+import StartPage from "./pages/StartPage";
 function App() {
     return (
-        <Wrapper>
-            <Container>
-                <Header />
-                <StyledButton />
-            </Container>
-        </Wrapper>
+        <BrowserRouter>
+            <Wrapper>
+                <Container>
+                    <Header />
+                    <Routes>
+                        {/* <StyledButton /> */}
+                        {/* <Route path="/" element={<LoginPage />} /> */}
+                        <Route path="/" element={<StartPage />} />
+                        <Route path="/login" element={<LoginPage />} />
+                    </Routes>
+                </Container>
+            </Wrapper>
+        </BrowserRouter>
     );
 }
 
@@ -28,7 +37,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-
+    position: relative;
     width: 375px;
     height: 812px;
     background-color: #ffffff;

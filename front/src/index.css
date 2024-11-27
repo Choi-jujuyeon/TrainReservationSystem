@@ -13,10 +13,14 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: #f0f0f0;
-    overflow: hidden; /* 스크롤 방지 */
+    /* overflow: hidden; //스크롤 방지 */
 }
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
+}
+a {
+    text-decoration: none;
+    color: inherit; /* 기본 텍스트 색상 유지 */
 }

@@ -1,10 +1,14 @@
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 const StyledButton = () => {
     return (
-        <Button>
-            <Text>EVERY Rail</Text>
-        </Button>
+        <div>
+            <Button>
+                <Link to="/login">
+                    <Text>EVERY Rail</Text>
+                </Link>
+            </Button>
+        </div>
     );
 };
 
