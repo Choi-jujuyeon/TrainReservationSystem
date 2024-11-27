@@ -31,6 +31,7 @@ const Wrapper = styled.div`
     height: 812px;
     background-color: #f0f0f0;
     margin: auto;
+    font-family: roboto;
 `;
 
 const Container = styled.div`
