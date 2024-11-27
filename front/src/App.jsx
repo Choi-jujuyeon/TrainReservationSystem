@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import LoginPage from "./pages/LoginPage";
 import StartPage from "./pages/StartPage";
 import SignUp from "./components/SignUp";
+import SelectModal from "./components/SelectModal";
 function App() {
     return (
         <BrowserRouter>
@@ -16,6 +17,7 @@ function App() {
                         <Route path="/" element={<StartPage />} />
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/signup" element={<SignUp />} />
+                        <Route path="/modal" element={<SelectModal />} />
                     </Routes>
                 </Container>
             </Wrapper>
