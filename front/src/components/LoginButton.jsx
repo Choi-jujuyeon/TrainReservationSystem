@@ -1,7 +1,10 @@
 import styled from "styled-components";
-const LoginButton = () => {
-    return <Button>Login</Button>;
+
+
+const LoginButton = ({ onClick }) => {
+    return <Button onClick={onClick}>Login</Button>;
 };
+
 export default LoginButton;
 
 const Button = styled.button`
