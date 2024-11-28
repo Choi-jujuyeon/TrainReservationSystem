@@ -28,7 +28,7 @@ const LoginPage = () => {
             <H>로그인</H>
             <InputBox inputs={inputs} />
             <LoginButtonContainer>
-                <LoginButton />
+                <LoginButton input="Login" />
                 <SignUpButton>
                     <Text>회원이 아니신가요?</Text>
                     <Link to="/signup">

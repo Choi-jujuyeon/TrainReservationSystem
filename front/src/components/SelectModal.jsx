@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 const SelectModal = () => {
     return (
         <Container>
@@ -9,14 +9,17 @@ const SelectModal = () => {
             />
             <H1>환영합니다 !</H1>
             <H3>아래 3가지 보기 옵션 중 원하시는 것을 선택해 주세요</H3>
-
             <Box>
-                <H4>기본 예약 페이지</H4>
-                <H5>"다양한 혜택을 확인하고, 간편하게 예약하세요."</H5>
+                <Link to="/main">
+                    <H4>기본 예약 페이지</H4>
+                    <H5>"다양한 혜택을 확인하고, 간편하게 예약하세요."</H5>
+                </Link>
             </Box>
             <Box>
-                <H4>음성 예약 페이지</H4>
-                <H5>"음성으로 간편하게 예약, 말로만 예약을 완료하세요."</H5>
+                <Link to="/aiVoice">
+                    <H4>음성 예약 페이지</H4>
+                    <H5>"음성으로 간편하게 예약, 말로만 예약을 완료하세요."</H5>
+                </Link>
             </Box>
         </Container>
     );
@@ -68,7 +71,7 @@ const Box = styled.button`
     border-radius: 32px;
     border: 1px solid #c5c6cc;
 
-    &:focus {
+    &:hover {
         border-color: #00ff95;
         outline: none;
         box-shadow: 0 0 5px rgba(0, 255, 51, 0.5);

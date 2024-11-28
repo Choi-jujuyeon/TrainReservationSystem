@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import styled from "styled-components";
-import InputBox from "./InputBox";
-import LoginButton from "./LoginButton";
+import InputBox from "../components/InputBox";
+import LoginButton from "../components/LoginButton";
 
 const SignUp = () => {
     const [username, setUsername] = useState("");
@@ -54,7 +54,7 @@ const SignUp = () => {
                     동의합니다
                 </Label>
             </CheckboxContainer>
-            <LoginButton />
+            <LoginButton input="SignUp" />
         </Wrapper>
     );
 };
