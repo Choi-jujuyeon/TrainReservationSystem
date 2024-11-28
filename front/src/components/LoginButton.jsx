@@ -1,13 +1,19 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 const LoginButton = ({ input }) => {
-    return <Button>{input}</Button>;
+    return (
+        <Link to="/modal">
+            <Button>{input}</Button>
+        </Link>
+    );
 };
 export default LoginButton;
 
 const Button = styled.button`
     background-color: #006ffd;
     height: 48px;
-    width: 100%;
+    /* width: 100%; */
+    width: 327px;
     border-radius: 12px;
     border: 1px solid #c5c6cc;
     color: white;

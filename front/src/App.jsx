@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import LoginPage from "./pages/LoginPage";
 import StartPage from "./pages/StartPage";
 import SignUp from "./pages/SignUp";
-import SelectModal from "./components/SelectModal";
+import SelectModal from "./pages/SelectModal";
 import Main from "./pages/Main";
 function App() {
     return (

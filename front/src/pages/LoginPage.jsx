@@ -4,10 +4,15 @@ import styled from "styled-components";
 import SocialLogin from "../components/SocialLogin";
 import InputBox from "../components/InputBox";
 import LoginButton from "../components/LoginButton";
+import SelectModal from "./SelectModal";
 const LoginPage = () => {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const handleLoginCick = () => {
+        setIsModalOpen(true);
+    };
     const inputs = [
         {
             type: "text",
@@ -29,6 +34,7 @@ const LoginPage = () => {
             <InputBox inputs={inputs} />
             <LoginButtonContainer>
                 <LoginButton input="Login" />
+
                 <SignUpButton>
                     <Text>회원이 아니신가요?</Text>
                     <Link to="/signup">
