@@ -8,6 +8,7 @@ import SelectModal from "./pages/SelectModal";
 import Main from "./pages/Main";
 import SeatInfo from "./pages/SeatInfo";
 import Loading from "./pages/Loading";
+import ReservCheckModal from "./components/ReservCheckModal";
 function App() {
     return (
         <BrowserRouter>
@@ -24,6 +25,10 @@ function App() {
                         <Route path="/main" element={<Main />} />
                         <Route path="/seatInfo" element={<SeatInfo />} />
                         <Route path="/loading" element={<Loading />} />
+                        <Route
+                            path="/reservmodal"
+                            element={<ReservCheckModal />}
+                        />
                     </Routes>
                 </Container>
             </Wrapper>
