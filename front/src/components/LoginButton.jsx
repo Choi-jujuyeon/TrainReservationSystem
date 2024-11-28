@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-const LoginButton = ({ input }) => {
+const LoginButton = ({ input, onClick }) => {
     return (
         <Link to="/modal">
-            <Button>{input}</Button>
+            <Button onClick={onClick}>{input}</Button>
         </Link>
     );
 };
+
 export default LoginButton;
 
 const Button = styled.button`
