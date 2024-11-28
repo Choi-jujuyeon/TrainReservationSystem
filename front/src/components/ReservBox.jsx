@@ -74,9 +74,9 @@ const ReservBox = () => {
             </D2>
             <ReservToggle />
 
-            <StyledLoginButton>
+            {/* <StyledLoginButton>
                 <StyledLinkButton to="/">열차조회</StyledLinkButton>
-            </StyledLoginButton>
+            </StyledLoginButton> */}
         </Container>
     );
 };
@@ -169,35 +169,5 @@ const Option = styled.div`
     cursor: pointer;
     &:hover {
         background-color: #f3f3f3;
-    }
-`;
-const StyledLoginButton = styled.div`
-    margin-top: 20px;
-    margin-bottom: 18px;
-
-    button {
-        width: 300px;
-        height: 40px;
-        font-size: 16px;
-        border: none;
-        cursor: pointer;
-    }
-`;
-const StyledLinkButton = styled(Link)`
-    display: flex;
-    width: 300px;
-    height: 35px;
-    /* padding: 3px; */
-    justify-content: center;
-    align-items: center;
-    /* padding: 3px 5px; */
-    background-color: #006ffd;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    border-radius: 10px;
-
-    &:hover {
-        background-color: #0056cc;
     }
 `;

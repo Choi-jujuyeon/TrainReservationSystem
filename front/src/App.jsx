@@ -6,6 +6,7 @@ import StartPage from "./pages/StartPage";
 import SignUp from "./pages/SignUp";
 import SelectModal from "./pages/SelectModal";
 import Main from "./pages/Main";
+import SeatInfo from "./pages/SeatInfo";
 function App() {
     return (
         <BrowserRouter>
@@ -20,6 +21,7 @@ function App() {
                         <Route path="/signup" element={<SignUp />} />
                         <Route path="/modal" element={<SelectModal />} />
                         <Route path="/main" element={<Main />} />
+                        <Route path="/seatInfo" element={<SeatInfo />} />
                     </Routes>
                 </Container>
             </Wrapper>

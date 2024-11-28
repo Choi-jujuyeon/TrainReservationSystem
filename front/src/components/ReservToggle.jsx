@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const ReservToggle = () => {
     const [selectedYear, setSelectedYear] = useState(
@@ -107,6 +108,9 @@ const ReservToggle = () => {
                     </Button>
                 </PeopleCount>
             </PeopleSelection>
+            <StyledLoginButton>
+                <StyledLinkButton to="/">열차조회</StyledLinkButton>
+            </StyledLoginButton>
         </Go>
     );
 };
@@ -132,6 +136,8 @@ const Label = styled.p`
 
 const DatePicker = styled.div`
     display: flex;
+    /* width: 200px; */
+    /* background-color: red; */
     gap: 8px;
 `;
 
@@ -142,6 +148,8 @@ const Select = styled.select`
     background-color: #fff;
     color: #333;
     cursor: pointer;
+    /* width: 200px; */
+    /* background-color: red; */
 
     &:focus {
         outline: none;
@@ -151,6 +159,7 @@ const Select = styled.select`
 
 const PeopleSelection = styled.div`
     display: flex;
+
     gap: 8px;
     align-items: center;
 `;
@@ -179,4 +188,34 @@ const Button = styled.button`
 const Count = styled.span`
     font-size: 14px;
     color: #333;
+`;
+const StyledLoginButton = styled.div`
+    margin-top: 20px;
+    margin-bottom: 18px;
+
+    button {
+        width: 300px;
+        height: 40px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+`;
+const StyledLinkButton = styled(Link)`
+    display: flex;
+    width: 300px;
+    height: 35px;
+    /* padding: 3px; */
+    justify-content: center;
+    align-items: center;
+    /* padding: 3px 5px; */
+    background-color: #006ffd;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: #0056cc;
+    }
 `;
