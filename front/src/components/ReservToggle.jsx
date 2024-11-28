@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 const ReservToggle = () => {
@@ -41,6 +42,40 @@ const ReservToggle = () => {
         setSelectedPeopleCount((prev) =>
             increment ? prev + 1 : Math.max(1, prev - 1)
         );
+    };
+
+    // 로그인된 사용자 ID 가져오기 (localStorage에서 가져옴)
+    const memberId = localStorage.getItem("memberId");
+
+    // 예약 정보 저장 함수
+    const handleReservation = async () => {
+        if (!memberId) {
+            alert("로그인 상태가 아닙니다.");
+            return;
+        }
+        alert(selectedDay+selectedMonth+selectedPeopleCount+parseInt(selectedTime.split(":")[0])+selectedPeopleType+memberId);
+        try {
+            const reservationData = {
+                year: selectedYear,
+                month: selectedMonth,
+                day: selectedDay,
+                time: parseInt(selectedTime.split(":")[0]),
+                peopleCount: selectedPeopleCount,
+                memberId: memberId, // 로그인된 사용자 ID
+            };
+        
+            // 백엔드 API로 예약 정보 전송
+            const response = await axios.post("http://localhost:5000/main", reservationData);
+
+            if (response.status === 201) {
+                alert("예약이 완료되었습니다!");
+            } else {
+                alert("예약에 실패했습니다.");
+            }
+        } catch (error) {
+            console.error("Error making reservation:", error);
+            alert("예약 처리 중 오류가 발생했습니다.");
+        }
     };
 
     return (
@@ -108,8 +143,9 @@ const ReservToggle = () => {
                     </Button>
                 </PeopleCount>
             </PeopleSelection>
+
             <StyledLoginButton>
-                <StyledLinkButton to="/">열차조회</StyledLinkButton>
+                <button onClick={handleReservation}>예약하기</button>
             </StyledLoginButton>
         </Go>
     );
@@ -123,9 +159,6 @@ const Go = styled.div`
     gap: 8px;
     width: 290px;
     height: auto;
-    /* background-color: #f7f7f7; */
-    border-radius: 8px;
-    /* padding: 12px; */
 `;
 
 const Label = styled.p`
@@ -136,8 +169,6 @@ const Label = styled.p`
 
 const DatePicker = styled.div`
     display: flex;
-    /* width: 200px; */
-    /* background-color: red; */
     gap: 8px;
 `;
 
@@ -148,8 +179,6 @@ const Select = styled.select`
     background-color: #fff;
     color: #333;
     cursor: pointer;
-    /* width: 200px; */
-    /* background-color: red; */
 
     &:focus {
         outline: none;
@@ -159,7 +188,6 @@ const Select = styled.select`
 
 const PeopleSelection = styled.div`
     display: flex;
-
     gap: 8px;
     align-items: center;
 `;
@@ -189,6 +217,7 @@ const Count = styled.span`
     font-size: 14px;
     color: #333;
 `;
+
 const StyledLoginButton = styled.div`
     margin-top: 20px;
     margin-bottom: 18px;
@@ -199,23 +228,8 @@ const StyledLoginButton = styled.div`
         font-size: 16px;
         border: none;
         cursor: pointer;
-    }
-`;
-const StyledLinkButton = styled(Link)`
-    display: flex;
-    width: 300px;
-    height: 35px;
-    /* padding: 3px; */
-    justify-content: center;
-    align-items: center;
-    /* padding: 3px 5px; */
-    background-color: #006ffd;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    border-radius: 10px;
-
-    &:hover {
-        background-color: #0056cc;
+        background-color: #006ffd;
+        color: white;
+        border-radius: 10px;
     }
 `;

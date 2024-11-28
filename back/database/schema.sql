@@ -38,7 +38,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES ('czxc','$2b$12$CvHoSAqQ6se8l5/OdkXfVeGphdWoF3NmGs/d/PxYsGK9NddFRcLkC','cxzczx',NULL),('czxdsa','$2b$12$pSJHfV0CG6PmqLp1icmXCeSSe47SigRUEkXOrlw/90140uNICrEVa','나라바',NULL),('czxdsad','$2b$12$pMYjUfNx2zuUpu/GIrR2S..z99mlkgbX.1ARzJMeQHcvwwjftgRFK','나라바',NULL),('das','$2b$12$J6N6NF2J6qCVgoLgNuIZ6.f.4A5h/9QgeIYdYFGspqOk4mx3DKKFa','dasd',NULL),('dsa','$2b$12$2nnIngp42Zyp9Upb1JNjHedCYdMYb9eaoWHgZvmoJ6IqkJmqi1Xla','ㅁㄴㅇㅁㄴ',NULL),('eq','$2b$12$YcRxxCtG/EIzb35p6f1miOes.rSq547XLt7aVdDDGiF.h8tuov6ka','dasdsa',NULL),('goodgng','$2b$12$fkkz2Txed0UJA1mVXNnevuis1xiKgvLun0g5QPSYjj1.Rm5eYytGy','전기혁',NULL),('zldtmshdn','$2b$12$G/dXM6O4vNWeaF29j8o.7OFCnDp.o3LVWLO0dDDLz1OZwfNHyRtyO','전기혁',NULL);
+INSERT INTO `member` VALUES ('aaa','$2b$12$RaZrLIrv1UFiPt0NFaABPOYfabJQLKbGTOtwWyntP617DI/srjaNm','aaa',NULL),('abc','$2b$12$yt2ZsCfSR8svV44p9mzLKu9JdquK5UH5aFfR8GqqEiRGs///KEvTC','abc',NULL),('czxc','$2b$12$CvHoSAqQ6se8l5/OdkXfVeGphdWoF3NmGs/d/PxYsGK9NddFRcLkC','cxzczx',NULL),('czxdsa','$2b$12$pSJHfV0CG6PmqLp1icmXCeSSe47SigRUEkXOrlw/90140uNICrEVa','나라바',NULL),('czxdsad','$2b$12$pMYjUfNx2zuUpu/GIrR2S..z99mlkgbX.1ARzJMeQHcvwwjftgRFK','나라바',NULL),('das','$2b$12$J6N6NF2J6qCVgoLgNuIZ6.f.4A5h/9QgeIYdYFGspqOk4mx3DKKFa','dasd',NULL),('dsa','$2b$12$2nnIngp42Zyp9Upb1JNjHedCYdMYb9eaoWHgZvmoJ6IqkJmqi1Xla','ㅁㄴㅇㅁㄴ',NULL),('eq','$2b$12$YcRxxCtG/EIzb35p6f1miOes.rSq547XLt7aVdDDGiF.h8tuov6ka','dasdsa',NULL),('goodgng','$2b$12$fkkz2Txed0UJA1mVXNnevuis1xiKgvLun0g5QPSYjj1.Rm5eYytGy','전기혁',NULL),('zldtmshdn','$2b$12$G/dXM6O4vNWeaF29j8o.7OFCnDp.o3LVWLO0dDDLz1OZwfNHyRtyO','전기혁',NULL);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,14 +54,13 @@ CREATE TABLE `reservation` (
   `depart_year` int NOT NULL,
   `depart_month` int NOT NULL,
   `depart_day` int NOT NULL,
-  `depart_hour` int NOT NULL,
-  `child_count` int NOT NULL DEFAULT '0',
-  `adult_count` int NOT NULL DEFAULT '0',
+  `depart_time` int NOT NULL,
+  `people_count` int NOT NULL DEFAULT '0',
   `member_id` varchar(45) NOT NULL,
   PRIMARY KEY (`reserve_id`),
   KEY `member_id_idx` (`member_id`),
   CONSTRAINT `member_id` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,6 +69,7 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
+INSERT INTO `reservation` VALUES (1,2024,1,1,5,1,'zldtmshdn'),(2,2024,1,1,5,1,'zldtmshdn'),(3,2024,1,1,5,1,'zldtmshdn'),(4,2024,1,1,5,1,'zldtmshdn');
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -82,4 +82,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-28 17:54:12
+-- Dump completed on 2024-11-29  2:29:39
