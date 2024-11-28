@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import LoginButton from "./LoginButton";
 import ReservToggle from "./ReservToggle";
+import { Link } from "react-router-dom";
+
 const ReservBox = () => {
     const [selectedDeparture, setSelectedDeparture] = useState("출발");
     const [selectedArrival, setSelectedArrival] = useState("도착");
@@ -73,7 +75,7 @@ const ReservBox = () => {
             <ReservToggle />
 
             <StyledLoginButton>
-                <LoginButton input="열차조회" />
+                <StyledLinkButton to="/">열차조회</StyledLinkButton>
             </StyledLoginButton>
         </Container>
     );
@@ -179,5 +181,23 @@ const StyledLoginButton = styled.div`
         font-size: 16px;
         border: none;
         cursor: pointer;
+    }
+`;
+const StyledLinkButton = styled(Link)`
+    display: flex;
+    width: 300px;
+    height: 35px;
+    /* padding: 3px; */
+    justify-content: center;
+    align-items: center;
+    /* padding: 3px 5px; */
+    background-color: #006ffd;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: #0056cc;
     }
 `;
