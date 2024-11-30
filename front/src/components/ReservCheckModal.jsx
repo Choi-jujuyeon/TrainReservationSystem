@@ -24,7 +24,11 @@ const ReservCheckModal = () => {
 };
 export default ReservCheckModal;
 const Overlay = styled.div`
-    position: fixed;
+    width: 375px;
+    height: 812px;
+    border-radius: 30px;
+
+    /* position: fixed; */
     top: 0;
     left: 0;
     right: 0;

@@ -109,7 +109,9 @@ const ReservToggle = () => {
                 </PeopleCount>
             </PeopleSelection>
             <StyledLoginButton>
-                <StyledLinkButton to="/">열차조회</StyledLinkButton>
+                <StyledLinkButton to="/selectReservation">
+                    열차조회
+                </StyledLinkButton>
             </StyledLoginButton>
         </Go>
     );
