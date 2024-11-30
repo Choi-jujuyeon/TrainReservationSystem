@@ -14,7 +14,7 @@ const ReservCheckModal = () => {
                     <Link to="/main">
                         <Button>홈으로 돌아가기</Button>
                     </Link>
-                    <Link to="/mypage">
+                    <Link to="/myticket">
                         <Button primary>예약 조회하기</Button>
                     </Link>
                 </ButtonContainer>

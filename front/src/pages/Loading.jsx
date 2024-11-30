@@ -1,6 +1,19 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+const Loading = ({ text, navigateTo }) => {
+    const navigate = useNavigate(); // useNavigate hook
 
-const Loading = () => {
+    useEffect(() => {
+        // 3초 후에 navigateTo 페이지로 이동
+        const timer = setTimeout(() => {
+            navigate(navigateTo); // props로 받은 navigateTo 경로로 이동
+        }, 2000);
+
+        // Cleanup timer on unmount
+        return () => clearTimeout(timer);
+    }, [navigate, navigateTo]);
+
     return (
         <Container>
             <LoaderWrapper>
@@ -12,7 +25,7 @@ const Loading = () => {
                     <Dot />
                 </Dots>
             </LoaderWrapper>
-            <Text>결제가 진행중입니다 !</Text>
+            <Text>{text}</Text>
         </Container>
     );
 };
@@ -33,11 +46,16 @@ const Container = styled.div`
     background-color: black;
     width: 100%;
     height: 100%;
-    border-radius: 30px;
+    /* height: 100vh; // 화면 꽉 채우기 위해 100vh 설정 */
+    position: absolute; // absolute로 설정해서 화면에 덮어씌우기
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 26px;
+    z-index: 999999;
 `;
 
 const LoaderWrapper = styled.div`
@@ -102,14 +120,11 @@ const Packman = styled.div`
 const Dots = styled.div`
     position: relative;
     background-color: yellowgreen;
-    /* margin-top: 300px; */
-    /* margin-bottom: 10px; */
 `;
 
 const Dot = styled.div`
     background-color: antiquewhite;
     position: absolute;
-    /* top: 8px; */
     bottom: 9px;
     width: 10px;
     height: 10px;

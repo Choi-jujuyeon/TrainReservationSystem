@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom"; // useNavigate import
+import Loading from "../pages/Loading";
 const ReservToggle = () => {
     const [selectedYear, setSelectedYear] = useState(
         new Date().getFullYear().toString()
@@ -13,6 +13,17 @@ const ReservToggle = () => {
     // 인원 선택 상태 관리
     const [selectedPeopleType, setSelectedPeopleType] = useState("어른");
     const [selectedPeopleCount, setSelectedPeopleCount] = useState(1);
+
+    // 로딩 상태 관리
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate(); // useNavigate hook
+
+    const handleLoading = () => {
+        setLoading(true);
+        setTimeout(() => {
+            navigate("/selectReservation"); // 3초 후에 해당 페이지로 이동
+        }, 3000);
+    };
 
     // 현재 연도를 기준으로 이후 연도만 표시
     const currentYear = new Date().getFullYear();
@@ -42,6 +53,15 @@ const ReservToggle = () => {
             increment ? prev + 1 : Math.max(1, prev - 1)
         );
     };
+
+    if (loading) {
+        return (
+            <Loading
+                text="Loading..."
+                navigateTo="/selectReservation" // 이동할 페이지
+            />
+        );
+    }
 
     return (
         <Go>
@@ -109,7 +129,7 @@ const ReservToggle = () => {
                 </PeopleCount>
             </PeopleSelection>
             <StyledLoginButton>
-                <StyledLinkButton to="/selectReservation">
+                <StyledLinkButton to="#" onClick={handleLoading}>
                     열차조회
                 </StyledLinkButton>
             </StyledLoginButton>
@@ -125,9 +145,7 @@ const Go = styled.div`
     gap: 8px;
     width: 290px;
     height: auto;
-    /* background-color: #f7f7f7; */
     border-radius: 8px;
-    /* padding: 12px; */
 `;
 
 const Label = styled.p`
@@ -138,8 +156,6 @@ const Label = styled.p`
 
 const DatePicker = styled.div`
     display: flex;
-    /* width: 200px; */
-    /* background-color: red; */
     gap: 8px;
 `;
 
@@ -150,8 +166,6 @@ const Select = styled.select`
     background-color: #fff;
     color: #333;
     cursor: pointer;
-    /* width: 200px; */
-    /* background-color: red; */
 
     &:focus {
         outline: none;
@@ -161,7 +175,6 @@ const Select = styled.select`
 
 const PeopleSelection = styled.div`
     display: flex;
-
     gap: 8px;
     align-items: center;
 `;
@@ -191,6 +204,7 @@ const Count = styled.span`
     font-size: 14px;
     color: #333;
 `;
+
 const StyledLoginButton = styled.div`
     margin-top: 20px;
     margin-bottom: 18px;
@@ -203,14 +217,13 @@ const StyledLoginButton = styled.div`
         cursor: pointer;
     }
 `;
+
 const StyledLinkButton = styled(Link)`
     display: flex;
     width: 300px;
     height: 35px;
-    /* padding: 3px; */
     justify-content: center;
     align-items: center;
-    /* padding: 3px 5px; */
     background-color: #006ffd;
     color: white;
     text-decoration: none;
