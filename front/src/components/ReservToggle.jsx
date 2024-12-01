@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom"; // useNavigate import
+import Loading from "../pages/Loading";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 const ReservToggle = () => {
     const [selectedYear, setSelectedYear] = useState(
@@ -14,6 +15,17 @@ const ReservToggle = () => {
     // 인원 선택 상태 관리
     const [selectedPeopleType, setSelectedPeopleType] = useState("어른");
     const [selectedPeopleCount, setSelectedPeopleCount] = useState(1);
+
+    // 로딩 상태 관리
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate(); // useNavigate hook
+
+    const handleLoading = () => {
+        setLoading(true);
+        setTimeout(() => {
+            navigate("/selectReservation"); // 3초 후에 해당 페이지로 이동
+        }, 3000);
+    };
 
     // 현재 연도를 기준으로 이후 연도만 표시
     const currentYear = new Date().getFullYear();
@@ -44,6 +56,7 @@ const ReservToggle = () => {
         );
     };
 
+
     // 로그인된 사용자 ID 가져오기 (localStorage에서 가져옴)
     const memberId = localStorage.getItem("memberId");
 
@@ -68,15 +81,25 @@ const ReservToggle = () => {
             const response = await axios.post("http://localhost:5000/main", reservationData);
 
             if (response.status === 201) {
-                alert("예약이 완료되었습니다!");
+                alert("데베에 저장됨")
             } else {
-                alert("예약에 실패했습니다.");
+                
             }
         } catch (error) {
             console.error("Error making reservation:", error);
-            alert("예약 처리 중 오류가 발생했습니다.");
+            
         }
     };
+
+    if (loading) {
+        return (
+            <Loading
+                text="Loading..."
+                navigateTo="/selectReservation" // 이동할 페이지
+            />
+        );
+    }
+
 
     return (
         <Go>
@@ -145,7 +168,9 @@ const ReservToggle = () => {
             </PeopleSelection>
 
             <StyledLoginButton>
-                <button onClick={handleReservation}>예약하기</button>
+            <StyledLinkButton to="#" onClick={() => { handleLoading(); handleReservation(); }}>
+    열차조회
+</StyledLinkButton>
             </StyledLoginButton>
         </Go>
     );
@@ -159,6 +184,7 @@ const Go = styled.div`
     gap: 8px;
     width: 290px;
     height: auto;
+    border-radius: 8px;
 `;
 
 const Label = styled.p`
@@ -231,5 +257,21 @@ const StyledLoginButton = styled.div`
         background-color: #006ffd;
         color: white;
         border-radius: 10px;
+    }
+`;
+
+const StyledLinkButton = styled(Link)`
+    display: flex;
+    width: 300px;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
+    background-color: #006ffd;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 10px;
+    &:hover {
+        background-color: #0056cc;
     }
 `;

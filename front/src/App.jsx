@@ -7,6 +7,10 @@ import SignUp from "./pages/SignUp";
 import SelectModal from "./pages/SelectModal";
 import Main from "./pages/Main";
 import SeatInfo from "./pages/SeatInfo";
+import Loading from "./pages/Loading";
+import ReservCheckModal from "./components/ReservCheckModal";
+import SelectReservation from "./pages/SelectReservation";
+import MyTicket from "./pages/MyTicket";
 function App() {
     return (
         <BrowserRouter>
@@ -22,6 +26,16 @@ function App() {
                         <Route path="/modal" element={<SelectModal />} />
                         <Route path="/main" element={<Main />} />
                         <Route path="/seatInfo" element={<SeatInfo />} />
+                        <Route path="/loading" element={<Loading />} />
+                        <Route path="/myticket" element={<MyTicket />} />
+                        <Route
+                            path="/selectReservation"
+                            element={<SelectReservation />}
+                        />
+                        <Route
+                            path="/reservmodal"
+                            element={<ReservCheckModal />}
+                        />
                     </Routes>
                 </Container>
             </Wrapper>

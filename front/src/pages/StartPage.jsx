@@ -1,14 +1,16 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Spline from "@splinetool/react-spline";
 
 const StartPage = () => {
     return (
         <div>
             <Button>
                 <Link to="/login">
-                    <Text>EVERY Rail</Text>
+                    <Spline scene="https://prod.spline.design/xwrHCxW4oaqEhhRE/scene.splinecode" />
                 </Link>
             </Button>
+            <Text>Train reservation system</Text>
         </div>
     );
 };
@@ -16,14 +18,15 @@ const StartPage = () => {
 export default StartPage;
 
 const Button = styled.button`
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
     margin: auto;
-    background: linear-gradient(45deg, #00b894, #00cec9, #fdcb6e);
-    border-radius: 50%;
+    /* background: linear-gradient(45deg, #00b894, #00cec9, #fdcb6e); */
+    border-radius: 30px;
     border: none;
     outline: none;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
@@ -70,12 +73,16 @@ const Button = styled.button`
 `;
 
 const Text = styled.div`
-    font-family: "Roboto", sans-serif;
-    font-size: 40px;
-    color: white;
+    font-family: "Roboto";
+    margin-top: 36px;
+    /* margin-left: 120px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* position: fixed; */
+    font-size: 20px;
+    color: #666666;
     font-weight: bold;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     letter-spacing: 2px;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6),
-        0 0 30px rgba(0, 255, 255, 0.8);
 `;

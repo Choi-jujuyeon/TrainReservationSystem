@@ -4,9 +4,9 @@ import styled from "styled-components";
 import SocialLogin from "../components/SocialLogin";
 import InputBox from "../components/InputBox";
 import LoginButton from "../components/LoginButton";
-import SelectModal from "./SelectModal";
+// import SelectModal from "./SelectModal";
 import axios from "axios"; // Axios 임포트
-const LoginPage = ({ input }) => {
+const LoginPage = () => {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     // const [isModalOpen, setIsModalOpen] = useState(false);
