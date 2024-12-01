@@ -21,7 +21,7 @@ const Navigation = () => {
                     <span>좌석번호</span>
                 </Tab>
             </Link>
-            <Link to="/mypage">
+            <Link to="/myticket">
                 <Tab>
                     <img
                         src={`${process.env.PUBLIC_URL}/assets/icons/ticket.svg`}

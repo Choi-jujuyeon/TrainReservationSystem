@@ -19,6 +19,7 @@ const SignUp = () => {
                 password,
             });
             alert(response.data.message);  // 정상 응답 처리
+            localStorage.setItem("loggedInUser", id); // 로그인 상태
         } catch (error) {
             // error.response가 undefined인 경우를 처리하기 위한 수정
             if (error.response) {
@@ -67,7 +68,6 @@ const SignUp = () => {
             onChange: (e) => setPassword(e.target.value),
         },
     ];
-
     return (
         <Wrapper>
             <Title>
@@ -85,7 +85,7 @@ const SignUp = () => {
             <LoginButton onClick={handleSignUp}>회원가입</LoginButton>
         </Wrapper>
     );
-};
+};  
 
 
 export default SignUp;

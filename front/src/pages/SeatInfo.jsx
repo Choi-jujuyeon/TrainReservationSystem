@@ -5,7 +5,8 @@ import Navigation from "../components/Navigation";
 const SeatInfo = () => {
     const nums = ["001 열차", "002 열차", "003 열차", "004 열차", "005 열차"];
     const [selectedTrain, setSelectedTrain] = useState("-");
-    const [isToggled, setIsToggled] = useState(false); // State for the toggle
+    const [isToggled, setIsToggled] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     const handleSelectChange = (e) => {
         setSelectedTrain(e.target.value);
@@ -13,6 +14,10 @@ const SeatInfo = () => {
 
     const handleToggleChange = () => {
         setIsToggled(!isToggled); // Toggle the state
+    };
+
+    const toggleModal = () => {
+        setShowModal(!showModal); // Toggle modal visibility
     };
 
     // 선택된 열차 정보 (선택한 열차 번호에 대한 잔여석 정보)
@@ -72,10 +77,21 @@ const SeatInfo = () => {
                         </label>
                     </div>
                     {isToggled ? (
-                        <img
-                            src={`${process.env.PUBLIC_URL}/assets/icons/seatDetailImg.svg`}
-                            alt="seatDetailImg"
-                        />
+                        <>
+                            <img
+                                src={`${process.env.PUBLIC_URL}/assets/icons/seatDetailImg.svg`}
+                                alt="seatDetailImg"
+                                onClick={toggleModal}
+                            />
+                            {showModal && (
+                                <Modal onClick={toggleModal}>
+                                    <img
+                                        src={`${process.env.PUBLIC_URL}/assets/icons/seatModal.svg`}
+                                        alt="seatModal"
+                                    />
+                                </Modal>
+                            )}
+                        </>
                     ) : (
                         <img
                             src={`${process.env.PUBLIC_URL}/assets/icons/seatImg.svg`}
@@ -227,4 +243,14 @@ const Box = styled.div`
     input:checked + .slider:before {
         transform: translateX(10px);
     }
+`;
+const Modal = styled.div`
+    z-index: 999999;
+    width: 220px;
+
+    display: flex;
+    justify-content: center;
+    /* margin-right: 20px; */
+    margin-top: 380px;
+    position: absolute;
 `;

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // useNavigate import
+import Loading from "../pages/Loading";
+import axios from "axios";
 
 const ReservToggle = () => {
     const [selectedYear, setSelectedYear] = useState(
@@ -13,6 +15,17 @@ const ReservToggle = () => {
     // 인원 선택 상태 관리
     const [selectedPeopleType, setSelectedPeopleType] = useState("어른");
     const [selectedPeopleCount, setSelectedPeopleCount] = useState(1);
+
+    // 로딩 상태 관리
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate(); // useNavigate hook
+
+    const handleLoading = () => {
+        setLoading(true);
+        setTimeout(() => {
+            navigate("/selectReservation"); // 3초 후에 해당 페이지로 이동
+        }, 3000);
+    };
 
     // 현재 연도를 기준으로 이후 연도만 표시
     const currentYear = new Date().getFullYear();
@@ -42,6 +55,51 @@ const ReservToggle = () => {
             increment ? prev + 1 : Math.max(1, prev - 1)
         );
     };
+
+
+    // 로그인된 사용자 ID 가져오기 (localStorage에서 가져옴)
+    const memberId = localStorage.getItem("memberId");
+
+    // 예약 정보 저장 함수
+    const handleReservation = async () => {
+        if (!memberId) {
+            alert("로그인 상태가 아닙니다.");
+            return;
+        }
+   
+        try {
+            const reservationData = {
+                year: selectedYear,
+                month: selectedMonth,
+                day: selectedDay,
+                time: parseInt(selectedTime.split(":")[0]),
+                peopleCount: selectedPeopleCount,
+                memberId: memberId, // 로그인된 사용자 ID
+            };
+        
+            // 백엔드 API로 예약 정보 전송
+            const response = await axios.post("http://localhost:5000/main", reservationData);
+
+            if (response.status === 201) {
+                alert("데베에 저장됨")
+            } else {
+                
+            }
+        } catch (error) {
+            console.error("Error making reservation:", error);
+            
+        }
+    };
+
+    if (loading) {
+        return (
+            <Loading
+                text="Loading..."
+                navigateTo="/selectReservation" // 이동할 페이지
+            />
+        );
+    }
+
 
     return (
         <Go>
@@ -108,8 +166,11 @@ const ReservToggle = () => {
                     </Button>
                 </PeopleCount>
             </PeopleSelection>
+
             <StyledLoginButton>
-                <StyledLinkButton to="/">열차조회</StyledLinkButton>
+            <StyledLinkButton to="#" onClick={() => { handleLoading(); handleReservation(); }}>
+    열차조회
+</StyledLinkButton>
             </StyledLoginButton>
         </Go>
     );
@@ -123,9 +184,7 @@ const Go = styled.div`
     gap: 8px;
     width: 290px;
     height: auto;
-    /* background-color: #f7f7f7; */
     border-radius: 8px;
-    /* padding: 12px; */
 `;
 
 const Label = styled.p`
@@ -136,8 +195,6 @@ const Label = styled.p`
 
 const DatePicker = styled.div`
     display: flex;
-    /* width: 200px; */
-    /* background-color: red; */
     gap: 8px;
 `;
 
@@ -148,8 +205,6 @@ const Select = styled.select`
     background-color: #fff;
     color: #333;
     cursor: pointer;
-    /* width: 200px; */
-    /* background-color: red; */
 
     &:focus {
         outline: none;
@@ -159,7 +214,6 @@ const Select = styled.select`
 
 const PeopleSelection = styled.div`
     display: flex;
-
     gap: 8px;
     align-items: center;
 `;
@@ -189,6 +243,7 @@ const Count = styled.span`
     font-size: 14px;
     color: #333;
 `;
+
 const StyledLoginButton = styled.div`
     margin-top: 20px;
     margin-bottom: 18px;
@@ -199,22 +254,23 @@ const StyledLoginButton = styled.div`
         font-size: 16px;
         border: none;
         cursor: pointer;
+        background-color: #006ffd;
+        color: white;
+        border-radius: 10px;
     }
 `;
+
 const StyledLinkButton = styled(Link)`
     display: flex;
     width: 300px;
     height: 35px;
-    /* padding: 3px; */
     justify-content: center;
     align-items: center;
-    /* padding: 3px 5px; */
     background-color: #006ffd;
     color: white;
     text-decoration: none;
     text-align: center;
     border-radius: 10px;
-
     &:hover {
         background-color: #0056cc;
     }
