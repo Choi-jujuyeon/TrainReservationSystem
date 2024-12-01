@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { useState } from "react";
 import Navigation from "../components/Navigation";
-
+import ReservCheckModal from "../components/ReservCheckModal";
 const SelectReservation = () => {
     const [selectedTrain, setSelectedTrain] = useState(null);
     const [showSeatSection, setShowSeatSection] = useState(false);
+    const [selectedSeats, setSelectedSeats] = useState([]); // 선택된 좌석 상태
+    const [showModal, setShowModal] = useState(false); // 모달 상태
 
     const handleTrainSelect = (train) => {
         setSelectedTrain(train);
@@ -13,6 +15,36 @@ const SelectReservation = () => {
 
     const toggleSeatSection = () => {
         setShowSeatSection((prev) => !prev);
+    };
+
+    const handleSeatClick = (row, col, label) => {
+        // 선택된 좌석을 중복 확인 없이 추가
+        const seatKey = `${row}-${col}`;
+        const alreadySelected = selectedSeats.some(
+            (seat) => seat.key === seatKey
+        );
+
+        if (!alreadySelected && selectedSeats.length < 2) {
+            setSelectedSeats([
+                ...selectedSeats,
+                { row, col, label, key: seatKey },
+            ]);
+        } else if (alreadySelected) {
+            // 이미 선택된 좌석을 클릭하면 선택 해제
+            setSelectedSeats(
+                selectedSeats.filter((seat) => seat.key !== seatKey)
+            );
+        }
+
+        // 두 개의 좌석이 선택되면 모달 열기
+        if (selectedSeats.length === 1 && !alreadySelected) {
+            setShowModal(true);
+        }
+    };
+
+    const handleModalClose = () => {
+        setShowModal(false);
+        setSelectedSeats([]); // 좌석 초기화
     };
 
     const trainData = [
@@ -81,7 +113,6 @@ const SelectReservation = () => {
         },
     ];
 
-    // 예약된 좌석 정보
     const reservedSeats = [
         { row: 3, col: 2 },
         { row: 4, col: 2 },
@@ -95,7 +126,6 @@ const SelectReservation = () => {
         );
     };
 
-    // 좌석 레이블 배열 (기둥 포함)
     const seatLabels = [
         "a-01",
         "b-01",
@@ -113,7 +143,6 @@ const SelectReservation = () => {
         "매진",
         "c-04",
         "d-04",
-
         "a-05",
         "b-05",
         "c-05",
@@ -134,7 +163,6 @@ const SelectReservation = () => {
 
     return (
         <Container>
-            {/* Train List Section */}
             <Title>
                 가는 열차 조회
                 <img
@@ -164,7 +192,6 @@ const SelectReservation = () => {
                 </TrainList>
             </Section>
 
-            {/* Seat Selection Section */}
             {showSeatSection && selectedTrain && (
                 <SeatSection>
                     <CloseButton onClick={toggleSeatSection}>X</CloseButton>
@@ -176,31 +203,63 @@ const SelectReservation = () => {
                     <SeatSelection>
                         <SeatGrid>
                             {seatLabels.map((label, index) => {
-                                const row = Math.floor(index / 4); // 0부터 7까지의 행
-                                const col = index % 4; // 각 행에 대해 0부터 3까지 열
+                                const row = Math.floor(index / 4);
+                                const col = index % 4;
                                 const isReserved = isSeatReserved(
                                     row + 1,
                                     col + 1
                                 );
-                                const isPillar = label === "기둥"; // 기둥 확인
+
+                                const isSelected = selectedSeats.some(
+                                    (seat) =>
+                                        seat.row === row + 1 &&
+                                        seat.col === col + 1
+                                );
 
                                 return (
                                     <Seat
                                         key={index}
-                                        available={!isReserved && !isPillar}
-                                        style={
-                                            isPillar
-                                                ? { backgroundColor: "#ccc" }
-                                                : {}
+                                        available={!isReserved}
+                                        selected={isSelected}
+                                        onClick={() =>
+                                            !isReserved &&
+                                            handleSeatClick(
+                                                row + 1,
+                                                col + 1,
+                                                label
+                                            )
                                         }
                                     >
-                                        {isPillar ? "기둥" : label}
+                                        {label}
                                     </Seat>
                                 );
                             })}
                         </SeatGrid>
                     </SeatSelection>
                 </SeatSection>
+            )}
+
+            {showModal && (
+                <ReservCheckModal
+                    title="좌석 선택 완료"
+                    message={
+                        "a-03좌석과 a-04 좌석이 선택되었습니다!\n 예약을 진행하시겠습니까?"
+                    }
+                    links={[
+                        {
+                            text: "홈으로 돌아가기",
+                            to: "/main",
+                            primary: false,
+                        },
+                        {
+                            text: "예약 진행하기",
+                            to: "/reservation",
+                            primary: true,
+                        },
+                    ]}
+                    seats={selectedSeats}
+                    onClose={handleModalClose}
+                />
             )}
 
             <Navigation />
@@ -211,14 +270,16 @@ const SelectReservation = () => {
 export default SelectReservation;
 
 const Container = styled.div`
-    width: 100%;
-    height: 100%;
+    /* width: 100%; */
+    width: 375px;
+    height: 812px;
+    /* height: 100%; */
     background-color: #f3f1f1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
 `;
 
 const Section = styled.div`
@@ -227,7 +288,7 @@ const Section = styled.div`
 `;
 
 const Title = styled.div`
-    margin-top: 24px;
+    /* margin-top: 24px; */
     margin-bottom: 18px;
     gap: 8px;
     display: flex;
@@ -290,17 +351,17 @@ const SeatSection = styled.div`
     justify-content: center;
     align-items: center;
     img {
-        height: 200px;
-        width: 100%;
+        /* height: 20px; */
+        width: 70%;
     }
 `;
 
 const CloseButton = styled.div`
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
     position: absolute;
-    top: 105px;
-    right: 30px;
+    top: 75px;
+    right: 60px;
     cursor: pointer;
 `;
 
@@ -321,7 +382,12 @@ const SeatGrid = styled.div`
 const Seat = styled.div`
     width: 70px;
     height: 40px;
-    background-color: ${(props) => (props.available ? "#42A5F5" : "#eeeeee")};
+    background-color: ${(props) =>
+        props.selected
+            ? "#FF5722" // 선택된 좌석 색상
+            : props.available
+            ? "#42A5F5"
+            : "#eeeeee"};
     display: flex;
     justify-content: center;
     align-items: center;
