@@ -16,7 +16,7 @@ const SelectModal = () => {
                 </Link>
             </Box>
             <Box>
-                <Link to="/aiVoice">
+                <Link to="/ai">
                     <H4>음성 예약 페이지</H4>
                     <H5>"음성으로 간편하게 예약, 말로만 예약을 완료하세요."</H5>
                 </Link>

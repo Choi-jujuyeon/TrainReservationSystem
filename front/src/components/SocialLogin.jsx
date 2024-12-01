@@ -7,7 +7,7 @@ const SocialLogin = () => {
         const naverLogin = new window.naver.LoginWithNaverId({
             clientId: "LaBgYk22Gu6d1p0kSPWN", // 네이버 개발자 센터에서 발급받은 Client ID
             callbackUrl: "http://localhost:3000/modal", // 로그인 성공 후 돌아올 URL
-            isPopup: true, // 팝업 로그인 사용
+            isPopup: false, // 팝업 로그인 사용
             loginButton: { color: "green", type: 3, height: 40 }, // 버튼 스타일
         });
 

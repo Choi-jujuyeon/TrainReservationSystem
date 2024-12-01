@@ -11,6 +11,7 @@ import Loading from "./pages/Loading";
 import ReservCheckModal from "./components/ReservCheckModal";
 import SelectReservation from "./pages/SelectReservation";
 import MyTicket from "./pages/MyTicket";
+import AiPage from "./pages/AiPage";
 function App() {
     return (
         <BrowserRouter>
@@ -28,6 +29,7 @@ function App() {
                         <Route path="/seatInfo" element={<SeatInfo />} />
                         <Route path="/loading" element={<Loading />} />
                         <Route path="/myticket" element={<MyTicket />} />
+                        <Route path="/ai" element={<AiPage />} />
                         <Route
                             path="/selectReservation"
                             element={<SelectReservation />}
