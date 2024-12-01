@@ -83,8 +83,7 @@ def login():
 @app.route('/main', methods=['POST'])
 def reserve():
     data = request.json
-    print("Received data:", data)
-    
+
     member_id = data.get('memberId')
     selected_year = data.get('year')
     selected_month = data.get('month')

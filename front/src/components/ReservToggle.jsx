@@ -53,7 +53,7 @@ const ReservToggle = () => {
             alert("로그인 상태가 아닙니다.");
             return;
         }
-        alert(selectedDay+selectedMonth+selectedPeopleCount+parseInt(selectedTime.split(":")[0])+selectedPeopleType+memberId);
+   
         try {
             const reservationData = {
                 year: selectedYear,
