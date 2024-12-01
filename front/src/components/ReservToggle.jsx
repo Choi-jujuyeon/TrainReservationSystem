@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom"; // useNavigate import
 import Loading from "../pages/Loading";
+import axios from "axios";
+
 const ReservToggle = () => {
     const [selectedYear, setSelectedYear] = useState(
         new Date().getFullYear().toString()
@@ -54,6 +56,41 @@ const ReservToggle = () => {
         );
     };
 
+
+    // 로그인된 사용자 ID 가져오기 (localStorage에서 가져옴)
+    const memberId = localStorage.getItem("memberId");
+
+    // 예약 정보 저장 함수
+    const handleReservation = async () => {
+        if (!memberId) {
+            alert("로그인 상태가 아닙니다.");
+            return;
+        }
+   
+        try {
+            const reservationData = {
+                year: selectedYear,
+                month: selectedMonth,
+                day: selectedDay,
+                time: parseInt(selectedTime.split(":")[0]),
+                peopleCount: selectedPeopleCount,
+                memberId: memberId, // 로그인된 사용자 ID
+            };
+        
+            // 백엔드 API로 예약 정보 전송
+            const response = await axios.post("http://localhost:5000/main", reservationData);
+
+            if (response.status === 201) {
+                alert("데베에 저장됨")
+            } else {
+                
+            }
+        } catch (error) {
+            console.error("Error making reservation:", error);
+            
+        }
+    };
+
     if (loading) {
         return (
             <Loading
@@ -62,6 +99,7 @@ const ReservToggle = () => {
             />
         );
     }
+
 
     return (
         <Go>
@@ -128,10 +166,11 @@ const ReservToggle = () => {
                     </Button>
                 </PeopleCount>
             </PeopleSelection>
+
             <StyledLoginButton>
-                <StyledLinkButton to="#" onClick={handleLoading}>
-                    열차조회
-                </StyledLinkButton>
+            <StyledLinkButton to="#" onClick={() => { handleLoading(); handleReservation(); }}>
+    열차조회
+</StyledLinkButton>
             </StyledLoginButton>
         </Go>
     );
@@ -215,6 +254,9 @@ const StyledLoginButton = styled.div`
         font-size: 16px;
         border: none;
         cursor: pointer;
+        background-color: #006ffd;
+        color: white;
+        border-radius: 10px;
     }
 `;
 
@@ -229,7 +271,6 @@ const StyledLinkButton = styled(Link)`
     text-decoration: none;
     text-align: center;
     border-radius: 10px;
-
     &:hover {
         background-color: #0056cc;
     }

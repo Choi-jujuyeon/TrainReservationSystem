@@ -40,6 +40,7 @@ const LoginPage = () => {
             if (response.status === 200) {
                 alert("로그인 성공!");
                 // 로그인 성공 후 추가 동작 (예: 페이지 이동) 처리
+                localStorage.setItem("loggedInUser", id);
             }
         } catch (error) {
             if (error.response) {
