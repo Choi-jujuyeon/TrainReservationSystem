@@ -8,7 +8,7 @@ const Loading = ({ text, navigateTo }) => {
         // 3초 후에 navigateTo 페이지로 이동
         const timer = setTimeout(() => {
             navigate(navigateTo); // props로 받은 navigateTo 경로로 이동
-        }, 2000);
+        }, 1500);
 
         // Cleanup timer on unmount
         return () => clearTimeout(timer);

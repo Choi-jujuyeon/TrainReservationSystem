@@ -1,52 +1,61 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-const ReservCheckModal = () => {
+
+const ReservCheckModal = ({ onClose, links, title, message }) => {
     return (
-        <Overlay>
-            <ModalContainer>
-                <Title>예약 완료!</Title>
+        <Overlay onClick={onClose}>
+            <ModalContainer onClick={(e) => e.stopPropagation()}>
+                <Title>{title}</Title>
                 <Message>
-                    승차권 예매가 완료되었습니다!
-                    <br />
-                    즐거운 여행 되세요 :)
+                    {message.split("\n").map((line, index) => (
+                        <span key={index}>
+                            {line}
+                            <br />
+                        </span>
+                    ))}
                 </Message>
                 <ButtonContainer>
-                    <Link to="/main">
-                        <Button>홈으로 돌아가기</Button>
-                    </Link>
-                    <Link to="/myticket">
-                        <Button primary>예약 조회하기</Button>
-                    </Link>
+                    {links.map(({ text, to, primary }, index) => (
+                        <CustomLink key={index} to={to}>
+                            <Button primary={primary}>{text}</Button>
+                        </CustomLink>
+                    ))}
                 </ButtonContainer>
             </ModalContainer>
         </Overlay>
     );
 };
-export default ReservCheckModal;
-const Overlay = styled.div`
-    width: 375px;
-    height: 812px;
-    border-radius: 30px;
 
-    /* position: fixed; */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+export default ReservCheckModal;
+const CustomLink = styled(Link)`
+    text-decoration: none;
+`;
+const Overlay = styled.div`
+    position: fixed;
+    /* top: 0; */
+    /* left: 0; */
+    /* right: 0; */
+    /* bottom: 0; */
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 375px;
+    /* width: 100%; */
+    /* height: 100%; */
+    height: 812px;
     z-index: 9999;
+    border-radius: 32px;
+    margin: auto;
 `;
 
 const ModalContainer = styled.div`
     background-color: white;
     border-radius: 16px;
-    padding: 10px;
+    padding: 20px;
     text-align: center;
-    width: 300px;
-    /* max-width: 400px; */
+    width: 90%;
+    max-width: 320px; /* 최대 너비 제한 */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: 2px solid #e3e6f0;
 `;
@@ -54,24 +63,25 @@ const ModalContainer = styled.div`
 const Title = styled.h2`
     color: #000000;
     font-size: 20px;
-    /* margin-bottom: 10px; */
+    margin-bottom: 10px;
 `;
 
 const Message = styled.p`
     color: #5a5a5a;
-    font-size: 12px;
+    font-size: 14px;
     margin-bottom: 20px;
+    line-height: 1.5;
 `;
 
 const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-around;
     gap: 10px;
+    margin-top: 15px;
 `;
 
 const Button = styled.button`
     padding: 12px 20px;
-    margin-bottom: 15px;
     font-size: 14px;
     font-weight: bold;
     border: none;

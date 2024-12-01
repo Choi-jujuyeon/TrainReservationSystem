@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 const Options = () => {
     return (
@@ -25,18 +26,19 @@ const Options = () => {
                     alt="rightArrow"
                 />
             </Option>
-
-            <Option>
-                <img
-                    src={`${process.env.PUBLIC_URL}/assets/icons/recommend.svg`}
-                    alt="recommend"
-                />
-                <H1>즐겨 찾는 좌석 정보 확인 및 예약</H1>
-                <img
-                    src={`${process.env.PUBLIC_URL}/assets/icons/rightArrow.svg`}
-                    alt="rightArrow"
-                />
-            </Option>
+            <Link to="/aiVoice">
+                <Option>
+                    <img
+                        src={`${process.env.PUBLIC_URL}/assets/icons/recommend.svg`}
+                        alt="recommend"
+                    />
+                    <H1>음성으로 기차표 티켓 예매하기 !</H1>
+                    <img
+                        src={`${process.env.PUBLIC_URL}/assets/icons/rightArrow.svg`}
+                        alt="rightArrow"
+                    />
+                </Option>{" "}
+            </Link>
         </>
     );
 };
