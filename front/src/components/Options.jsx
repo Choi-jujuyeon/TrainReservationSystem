@@ -3,18 +3,19 @@ import styled from "styled-components";
 const Options = () => {
     return (
         <>
-            <Option>
-                <img
-                    src={`${process.env.PUBLIC_URL}/assets/icons/info.svg`}
-                    alt="info"
-                />
-                <H1>나에게 맞는 할인 혜택 추천받기</H1>
-                <img
-                    src={`${process.env.PUBLIC_URL}/assets/icons/rightArrow.svg`}
-                    alt="rightArrow"
-                />
-            </Option>
-
+            <Link to="/suggest">
+                <Option>
+                    <img
+                        src={`${process.env.PUBLIC_URL}/assets/icons/info.svg`}
+                        alt="info"
+                    />
+                    <H1>나에게 맞는 할인 혜택 추천받기</H1>
+                    <img
+                        src={`${process.env.PUBLIC_URL}/assets/icons/rightArrow.svg`}
+                        alt="rightArrow"
+                    />
+                </Option>
+            </Link>
             <Option>
                 <img
                     src={`${process.env.PUBLIC_URL}/assets/icons/alarm.svg`}

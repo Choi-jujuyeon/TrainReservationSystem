@@ -35,7 +35,7 @@ const ReservBox = () => {
                 </D2>
                 <Go>
                     <Label>가는날</Label>
-                    <Text>2024년 12월 15일 05:00</Text>
+                    <Text>2024년 12월 15일 06:00</Text>
 
                     <Label>인원 선택</Label>
                     <Text>어른 2명</Text>

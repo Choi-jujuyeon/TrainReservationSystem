@@ -12,7 +12,8 @@ import ReservCheckModal from "./components/ReservCheckModal";
 import SelectReservation from "./pages/SelectReservation";
 import MyTicket from "./pages/MyTicket";
 import Reservation from "./pages/Reservation";
-import Pay from "./pages/PaymentMethod";
+import PaymentMethod from "./pages/PaymentMethod";
+import Suggest from "./pages/Suggest";
 function App() {
     return (
         <BrowserRouter>
@@ -31,7 +32,11 @@ function App() {
                         <Route path="/loading" element={<Loading />} />
                         <Route path="/myticket" element={<MyTicket />} />
                         <Route path="/reservation" element={<Reservation />} />
-                        <Route path="/paymentmethod" element={<Pay />} />
+                        <Route path="/suggest" element={<Suggest />} />
+                        <Route
+                            path="/paymentmethod"
+                            element={<PaymentMethod />}
+                        />
                         <Route
                             path="/selectReservation"
                             element={<SelectReservation />}
