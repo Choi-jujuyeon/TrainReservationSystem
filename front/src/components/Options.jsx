@@ -27,7 +27,7 @@ const Options = () => {
                     alt="rightArrow"
                 />
             </Option>
-            <Link to="/aiVoice">
+            <Link to="/ai">
                 <Option>
                     <img
                         src={`${process.env.PUBLIC_URL}/assets/icons/recommend.svg`}

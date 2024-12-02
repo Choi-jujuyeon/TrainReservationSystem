@@ -14,6 +14,7 @@ import MyTicket from "./pages/MyTicket";
 import Reservation from "./pages/Reservation";
 import PaymentMethod from "./pages/PaymentMethod";
 import Suggest from "./pages/Suggest";
+import AiPage from "./pages/AiPage";
 function App() {
     return (
         <BrowserRouter>
@@ -37,6 +38,7 @@ function App() {
                             path="/paymentmethod"
                             element={<PaymentMethod />}
                         />
+                        <Route path="/ai" element={<AiPage />} />
                         <Route
                             path="/selectReservation"
                             element={<SelectReservation />}

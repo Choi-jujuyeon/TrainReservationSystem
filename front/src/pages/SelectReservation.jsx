@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navigation from "../components/Navigation";
 import ReservCheckModal from "../components/ReservCheckModal";
 const SelectReservation = () => {
@@ -7,7 +7,12 @@ const SelectReservation = () => {
     const [showSeatSection, setShowSeatSection] = useState(false);
     const [selectedSeats, setSelectedSeats] = useState([]); // 선택된 좌석 상태
     const [showModal, setShowModal] = useState(false); // 모달 상태
-
+    useEffect(() => {
+        const seatSectionFlag = localStorage.getItem("showSeatSection");
+        if (seatSectionFlag === "1") {
+            setShowSeatSection(true); // Show seat section if flag is 1
+        }
+    }, []);
     const handleTrainSelect = (train) => {
         setSelectedTrain(train);
         setShowSeatSection(true); // 기차 선택 시 좌석 선택 화면을 띄우기
